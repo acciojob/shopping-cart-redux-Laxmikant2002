@@ -16,10 +16,15 @@ const Wishlist = () => {
     dispatch(removeFromWishlist(item.id));
   };
 
+  const handleRemoveFromWishlist = (id) => {
+    dispatch(removeFromWishlist(id));
+  };
+
   if (wishlistItems.length === 0) {
     return (
       <div className="wishlist">
-        <h2>Wishlist</h2>
+        <h2>Wishlists</h2>
+        <p>All Your Favorite Products</p>
         <p className="empty-message">Your wishlist is empty</p>
       </div>
     );
@@ -27,7 +32,8 @@ const Wishlist = () => {
 
   return (
     <div className="wishlist">
-      <h2>Wishlist</h2>
+      <h2>Wishlists</h2>
+      <p>All Your Favorite Products</p>
       <div className="wishlist-items">
         {wishlistItems.map((item) => (
           <div key={item.id} className="wishlist-item">
@@ -46,7 +52,7 @@ const Wishlist = () => {
               </button>
               <button 
                 className="btn-remove"
-                onClick={() => handleRemove(item.id)}
+                onClick={() => handleRemoveFromWishlist(item.id)}
               >
                 Remove
               </button>

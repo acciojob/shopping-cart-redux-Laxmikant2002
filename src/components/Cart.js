@@ -60,7 +60,29 @@ const Cart = () => {
     return (
       <div className="cart">
         <h2>Shopping Cart</h2>
+        <div className="cart-header">
+          <p>Cart ( 0 items)</p>
+        </div>
         <p className="empty-message">Your cart is empty</p>
+        <div className="cart-summary">
+          <h3>The Total Amount Of</h3>
+          <div className="summary-row">
+            <span>Temporary Amount</span>
+            <span>Rs 0</span>
+          </div>
+          <div className="summary-row">
+            <span>Shipping</span>
+            <span>Free</span>
+          </div>
+          <div className="summary-row total">
+            <span>Total Amount Of<br/>(including VAT)</span>
+            <span>Rs 0</span>
+          </div>
+          <button className="btn-checkout">Go to checkout</button>
+          <div className="coupon-link">
+            <span>Add a discount code (optional)</span>
+          </div>
+        </div>
       </div>
     );
   }
@@ -68,6 +90,9 @@ const Cart = () => {
   return (
     <div className="cart">
       <h2>Shopping Cart</h2>
+      <div className="cart-header">
+        <p>Cart ( {items.length} items)</p>
+      </div>
       <div className="cart-items">
         {items.map((item) => (
           <div key={item.id} className="cart-item">
@@ -123,21 +148,29 @@ const Cart = () => {
       </div>
 
       <div className="cart-summary">
+        <h3>The Total Amount Of</h3>
         <div className="summary-row">
-          <span>Subtotal:</span>
-          <span>${calculateSubtotal().toFixed(2)}</span>
+          <span>Temporary Amount</span>
+          <span>Rs {calculateSubtotal().toFixed(2)}</span>
+        </div>
+        <div className="summary-row">
+          <span>Shipping</span>
+          <span>Free</span>
         </div>
         {discount > 0 && (
           <div className="summary-row discount">
-            <span>Discount ({discount}%):</span>
-            <span>-${calculateDiscount().toFixed(2)}</span>
+            <span>Discount ({discount}%)</span>
+            <span>-Rs {calculateDiscount().toFixed(2)}</span>
           </div>
         )}
         <div className="summary-row total">
-          <span>Total:</span>
-          <span>${calculateTotal().toFixed(2)}</span>
+          <span>Total Amount Of<br/>(including VAT)</span>
+          <span>Rs {calculateTotal().toFixed(2)}</span>
         </div>
-        <button className="btn-checkout">Proceed to Checkout</button>
+        <button className="btn-checkout">Go to checkout</button>
+        <div className="coupon-link">
+          <span>Add a discount code (optional)</span>
+        </div>
       </div>
     </div>
   );

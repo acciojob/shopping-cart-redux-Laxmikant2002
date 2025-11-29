@@ -7,6 +7,14 @@ import products from '../data/products';
 const ProductList = () => {
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state) => state.wishlist.items);
+  const cartItems = useSelector((state) => state.cart.items);
+
+  // Filter out products that are already in cart or wishlist
+  const availableProducts = products.filter(product => {
+    const inCart = cartItems.some(item => item.id === product.id);
+    const inWishlist = wishlistItems.some(item => item.id === product.id);
+    return !inCart && !inWishlist;
+  });
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
@@ -27,9 +35,13 @@ const ProductList = () => {
 
   return (
     <div className="product-list">
-      <h2>Products</h2>
+      <h2>All Products</h2>
+      <p>All Products that available to order</p>
+      {availableProducts.length === 0 ? (
+        <p className="empty-message">All products have been added to cart or wishlist!</p>
+      ) : (
       <div className="products-grid">
-        {products.map((product) => (
+        {availableProducts.map((product) => (
           <div key={product.id} className="product-card">
             <img src={product.image} alt={product.name} />
             <h3>{product.name}</h3>
@@ -52,6 +64,7 @@ const ProductList = () => {
           </div>
         ))}
       </div>
+      )}
     </div>
   );
 };
